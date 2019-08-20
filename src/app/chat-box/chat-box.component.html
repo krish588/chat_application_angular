@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="username-field-container" *ngIf="showUserForm">
+    <mat-form-field>
+      <input matInput #userName placeholder="Username" value="" (keydown.enter)="setUserName(userName.value)">
+    </mat-form-field>
+    <button (click)="setUserName(userName.value)">Set Username</button>
+  </div>
+  <div class="username-label" *ngIf="!showUserForm">
+    <h3>
+      Username: {{ userName }}
+    </h3>
+  </div>
+
+  <div class="reciever-field-container" *ngIf="showToUserForm">
+    <mat-form-field>
+      <input matInput #reciever placeholder="Reciever Name" (keydown.enter)="setReciever(reciever.value)">
+    </mat-form-field>
+    <button (click)="setReciever(reciever.value)">Set Reciever</button>
+  </div>
+  <div class="reciever-label" *ngIf="!showToUserForm">
+    <h3>
+      TO: {{ toUser }}
+    </h3>
+  </div>
+
+
+  <div id="chat-page">
+    <div class="chat-container">
+      <h2 class="chat-header">
+        Chat box
+      </h2>
+      <div id="messageArea" #messageBox [scrollTop]="messageBox.scrollHeight">
+        <ul>
+          <ng-template appPlaceholder></ng-template>
+
+        </ul>
+      </div>
+
+      <div class="form-controls" *ngIf="showForm">
+        <form class="message-form" id="messageForm" name="messageForm">
+          <div class="form-group">
+            <div class="input-group clearfix">
+              <textarea id="message" placeholder="Type a message ..." autocomplete="off" class="form-control"
+                placeholder="Leave a Message" #messageTextArea
+                (keydown.enter)="sendMessage(messageTextArea.value); messageTextArea.value=''"></textarea>
+                <button type="submit" (click)="sendMessage(messageTextArea.value); messageTextArea.value=''">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
